@@ -1,34 +1,102 @@
+function loadUsersFromLocalStorage() {
+    const storedUsers = localStorage.getItem('users');
+    return storedUsers ? JSON.parse(storedUsers) : [];
+}
+
+function saveUsersToLocalStorage(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+    console.log('Users saved to local storage:', users);
+}
+
+
+let users = loadUsersFromLocalStorage();
+console.log('Users loaded from local storage:', users);
+
+
+function addUser(email, username, password) {
+    const existingUser = users.find(user => user.email === email || user.username === username);
+
+    if (existingUser) {
+        alert("Email or username already exists. Please choose a different one.");
+        return;
+    }
+
+    users.push({ email, username, password });
+    saveUsersToLocalStorage(users);
+}
+
+
+function authenticate(emailOrUsername, password) {
+    const user = users.find(u => u.email === emailOrUsername || u.username === emailOrUsername);
+
+    if (user && user.password === password) {
+        return user;
+    } else {
+        return null;
+    }
+}
+
+function handleSignUp(event) {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    addUser(email, username, password);
+
+    window.location.href = `/pages/todo.html?email=${email}&username=${username}`;
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+
+    const usernameOrEmail = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const user = authenticate(usernameOrEmail, password);
+    if (user) {
+        window.location.href = `/pages/todo.html?email=${user.email}&username=${user.username}`;
+    } else {
+        alert("Wrong email/username or password. Please try again.");
+    }
+}
+
 function showSignUpForm() {
-    let usernameField = document.getElementById("usernameField");
+    let emailField = document.getElementById("emailField");
     let toggleText = document.getElementById("toggleText");
     let submitButton = document.getElementById("submitButton");
-    let emailInput = document.getElementById("email");
+    let usernameInput = document.getElementById("username");
+    let loginForm = document.getElementById("loginForm");
 
-    usernameField.style.display = "flex"; 
-    toggleText.innerHTML = "Already have an account? <a id='toggleLink' href='#'>Login</a>";
+    emailField.style.display = "flex";
+    toggleText.innerHTML = "Already have an account? <a id='toggleLink' href='#' onclick='showLoginForm()'>Login</a>";
     submitButton.innerHTML = "Sign up";
+    usernameInput.placeholder = "Username";
+    let emailInput = emailField.querySelector("input");
     emailInput.placeholder = "Email";
-    let loginLink = toggleText.querySelector("#toggleLink");
-    loginLink.addEventListener("click", function(event) {
-        showLoginForm();
-    });
+    emailInput.setAttribute("required", "true");
+    loginForm.removeAttribute("action");
+    loginForm.removeAttribute("onsubmit");
+    document.getElementById("loginForm").setAttribute("onsubmit", "event.preventDefault(); handleSignUp(event);");
 }
 
 function showLoginForm() {
-    let usernameField = document.getElementById("usernameField");
+    let emailField = document.getElementById("emailField");
     let toggleText = document.getElementById("toggleText");
     let submitButton = document.getElementById("submitButton");
-    let emailInput = document.getElementById("email");
+    let usernameInput = document.getElementById("username");
+    let loginForm = document.getElementById("loginForm");
 
-    usernameField.style.display = "none";
-    toggleText.innerHTML = "Don't have an account? <a id='toggleLink' href='#'>Sign up</a>";
+    emailField.style.display = "none";
+    toggleText.innerHTML = "Don't have an account? <a id='toggleLink' href='#' onclick='showSignUpForm()'>Sign up</a>";
     submitButton.innerHTML = "Log in";
-    emailInput.placeholder = "Email / Username"; 
-
-    let signUpLink = toggleText.querySelector("#toggleLink");
-    signUpLink.addEventListener("click", function(event) {
-        showSignUpForm();
-    });
+    usernameInput.placeholder = "Email / Username";
+    let emailInput = emailField.querySelector("input");
+    emailInput.removeAttribute("required");
+    loginForm.removeAttribute("action");
+    loginForm.removeAttribute("onsubmit");
+    document.getElementById("loginForm").setAttribute("onsubmit", "event.preventDefault(); handleLogin(event);");
 }
 
 showLoginForm();

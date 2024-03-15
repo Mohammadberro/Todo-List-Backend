@@ -47,14 +47,14 @@ form .form-field::before {
 }
 
 form .form-field:nth-child(1)::before {
-  background-image: url(../assets/email.png);
+  background-image: url(../assets/user-icon.png);
   width: 20px;
   height: 20px;
   top: 15px;
 }
 
 form .form-field:nth-child(2)::before {
-    background-image: url(../assets/user-icon.png);
+    background-image: url(../assets/email.png);
     width: 20px;
     height: 20px;
     top: 15px;
