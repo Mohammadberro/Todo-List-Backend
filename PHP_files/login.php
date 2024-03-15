@@ -1,8 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-
-// Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $json_data = file_get_contents("php://input");

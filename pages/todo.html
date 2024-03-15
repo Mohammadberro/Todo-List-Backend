@@ -1,3 +1,5 @@
+<!-- todo.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,52 +11,65 @@
 </head>
 <body>
   <div id="bg">
-  <div class="sidebar">
-      <ul class="menu">
-          <li>
-              <a href="#">
-                  <i class="fas fa-plus"></i>
-                  <span>Add</span>
-              </a>
-          </li> 
-          <li>
-              <a href="#">
-                  <i class="fas fa-edit"></i>
-                  <span>Edit</span>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-                  <i class="fas fa-trash-alt"></i>
-                  <span>Delete</span>
-              </a>
-          </li>
-          <li class="logout">
-              <a href="../index.html">
-                  <i class="fas fa-sign-out-alt"></i>
-                  <span>Logout</span>
-              </a>
-          </li>
-      </ul>
-  </div>
-  <div class="card-container">
-        <div class="todo-wrapper light-green">
-          <h2 class="todo-header">Todo</h2>
-          <div class="todo-card">
-            <div class="todo-box">
-                <div class="text-holdeder">
-                    <span class="title">
-                        Finish assignment
-                    </span>
-                    <span class="description" id="description">
-                        Implement link to backend
-                    </span>
+    <div class="sidebar">
+        <ul class="menu">
+            <li>
+                <a href="#" onclick="openPopup()">
+                    <i class="fas fa-plus"></i>
+                    <span>Add</span>
+                </a>
+            </li> 
+            <li>
+                <a href="#">
+                    <i class="fas fa-edit"></i>
+                    <span>Edit</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Delete</span>
+                </a>
+            </li>
+            <li class="logout">
+                <a href="../index.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-container">
+        <div class="todo-wrapper light-green" id="todos-container">
+            <h2 class="todo-header">Todo</h2>
+            <div class="todo-card">
+                <div class="todo-box">
+                    <div class="text-holdeder">
+                        <span class="title">
+                            Finish assignment
+                        </span>
+                        <span class="description" id="description">
+                            Implement link to backend
+                        </span>
+                    </div>
+                    <input type="checkbox"></input>
                 </div>
-                <input type="checkbox"></input>
             </div>
         </div>
+    </div>
+    <div class="popup" id="todo-popup">
+        <h2>Enter TODO Details<i class="fa-regular fa-x cancel-button" onclick="removePopup()"></i></h2>
+        <div id="todo-form" class="todo-field">
+            <div class="form-field">
+                <h3>Title:</h3><input id="title" type="text" placeholder="Title"/>
+            </div>
+            <div class="form-field">
+                <h3>Description:</h3><input id="description" type="text" placeholder="Description" required/>
+            </div>
+            <button type="submit" onclick="addTodo()">Add</button>
         </div>
+    </div>
   </div>
-
+  <script src="/scripts/todo.js"></script>
 </body>
 </html>
