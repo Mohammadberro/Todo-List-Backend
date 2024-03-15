@@ -43,9 +43,28 @@ function handleSignUp(event) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    addUser(email, username, password);
-
-    window.location.href = `/pages/todo.html?email=${email}&username=${username}`;
+    fetch('http://localhost/todo_users/signup.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email,
+            username: username,
+            password: password
+        })
+    })
+    .then(response => response.text())
+    .then(message => {
+        if (message === "User registered successfully!") {
+            window.location.href = `/pages/todo.html?email=${email}&username=${username}`;
+        } else {
+            alert(message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function handleLogin(event) {
@@ -54,12 +73,25 @@ function handleLogin(event) {
     const usernameOrEmail = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const user = authenticate(usernameOrEmail, password);
-    if (user) {
-        window.location.href = `/pages/todo.html?email=${user.email}&username=${user.username}`;
-    } else {
-        alert("Wrong email/username or password. Please try again.");
-    }
+    fetch('http://localhost/todo_users/login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            emailOrUsername: usernameOrEmail,
+            password: password
+        })
+    })
+    .then(response => response.text())
+    .then(message => {
+        if (message === "Login successful!") {
+            const user = { email: usernameOrEmail, username: 'example_username' };
+            window.location.href = `/pages/todo.html?email=${user.email}&username=${user.username}`;
+        } else {
+            alert(message);
+        }
+    })
 }
 
 function showSignUpForm() {
