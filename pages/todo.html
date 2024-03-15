@@ -4,10 +4,57 @@
   <meta charset="UTF-8">
   <title>Login Page with Background Image Example</title>
   <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../styles/todo.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<div id="bg"></div>
-</form>
+  <div id="bg">
+  <div class="sidebar">
+      <ul class="menu">
+          <li>
+              <a href="#">
+                  <i class="fas fa-plus"></i>
+                  <span>Add</span>
+              </a>
+          </li> 
+          <li>
+              <a href="#">
+                  <i class="fas fa-edit"></i>
+                  <span>Edit</span>
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                  <i class="fas fa-trash-alt"></i>
+                  <span>Delete</span>
+              </a>
+          </li>
+          <li class="logout">
+              <a href="../index.html">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Logout</span>
+              </a>
+          </li>
+      </ul>
+  </div>
+  <div class="card-container">
+        <div class="todo-wrapper light-green">
+          <h2 class="todo-header">Todo</h2>
+          <div class="todo-card">
+            <div class="todo-box">
+                <div class="text-holdeder">
+                    <span class="title">
+                        Finish assignment
+                    </span>
+                    <span class="description" id="description">
+                        Implement link to backend
+                    </span>
+                </div>
+                <input type="checkbox"></input>
+            </div>
+        </div>
+        </div>
+  </div>
 
 </body>
 </html>

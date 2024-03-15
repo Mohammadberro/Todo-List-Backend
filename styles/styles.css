@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 
+*{
+  margin:0;
+  padding:0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 #bg {
   background-image: url('../assets/background.jpg');
   position: fixed;
